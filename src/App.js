@@ -1,10 +1,18 @@
-import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GlobalStyle from './components/common/GlobalStyle';
+import Login from "./components/Login/Login";
+import Registration from "./components/Registration/Registration";
 
 export default function App() {
     return (
-        <h1>APP</h1>
+        <>
+            <GlobalStyle />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/cadastro" element={<Registration />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     )
 }
-const GlobalStyle = styled.div`
-font-family: 'Lexend Deca', sans-serif;
-`
