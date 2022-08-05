@@ -4,18 +4,10 @@ import { postHabit } from "../services/trackIt";
 import Input from "../common/Input";
 import Weekday from "./Weekday";
 
-export default function CreateCard({ setCreateNow }) {
+export default function CreateCard({ setCreateNow,weekdays }) {
     const [name, setName] = useState("");
     const [days, setDays] = useState([]);
-    const weekdays = [
-        { weekday: "D" },
-        { weekday: "S" },
-        { weekday: "T" },
-        { weekday: "Q" },
-        { weekday: "Q" },
-        { weekday: "S" },
-        { weekday: "S" },
-    ];
+ 
     function createHabit(e) {
         e.preventDefault();
         if (days.length === 0) {
@@ -64,6 +56,7 @@ const Wrapper = styled.div`
         font-size: 16px;
         color: #52B6FF;
         margin-right: 23px;
+        cursor: pointer;
     }
     button{
         width: 84px;

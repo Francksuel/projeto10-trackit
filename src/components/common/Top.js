@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import logotipo from '../assets/trackIt.png'
-export default function Top({source}){
-return(
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+
+export default function Top(){
+    const {dataClient}=useContext(UserContext);
+return( 
 <Wrapper>
 <Logotipo src={logotipo} alt="logotipo"/> 
-<img src={source} alt="profile"/>
+<img src={dataClient.image} alt="profile"/>
 </Wrapper>
 )   
 }

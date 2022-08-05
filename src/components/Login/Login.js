@@ -2,14 +2,17 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { postLogin } from "../services/trackIt";
+import { useContext } from "react";
 import Logo from "../common/Logo";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import UserContext from "../../contexts/UserContext";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {setDataClient}=useContext(UserContext);
 
     function logInto(e) {
         e.preventDefault();
@@ -19,8 +22,9 @@ export default function Login() {
         }
         const request = postLogin(dataLog);
         request.then((res) => {
-            localStorage.setItem('trackIt', JSON.stringify(res.data.token));            
-            navigate("/habitos", { state: res.data })
+            localStorage.setItem('trackIt', JSON.stringify(res.data.token));  
+            setDataClient(res.data);          
+            navigate("/habitos");
         }
         );
         request.catch(()=>alert ("Usuário não encontrado"));
