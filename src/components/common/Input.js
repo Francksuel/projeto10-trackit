@@ -1,7 +1,7 @@
 import styled from "styled-components";
-export default function Input({placeholder,type, value, ...otherProps}){
+export default function Input({placeholder,type, value,disabled, ...otherProps}){
 return(
-<Wrapper required value={value} placeholder={placeholder} type={type} {...otherProps}/>
+<Wrapper required disabled={disabled} value={value} placeholder={placeholder} type={type} {...otherProps}/>
 )   
 }
 

@@ -49,10 +49,25 @@ a{
 }
 body {
     font-family: 'Lexend Deca', sans-serif;
+	background-color: #F2F2F2;
 }
 *{
     box-sizing: border-box;
 }
+h1{
+	font-size: 23px;
+	color:#126BA5;	
+}
+h2{
+	color: #666666;
+    font-size: 18px;
+    margin: 29px 18px; 
+}
+h3{
+        color: #666666;
+        font-size: 20px;
+		margin-bottom: 8px;
+    }
 h6{
 	color:#52B6FF;
 	font-size: 14px;

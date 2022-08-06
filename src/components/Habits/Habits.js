@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { getHabits } from "../services/trackIt";
+import { getHabits } from "../../services/trackIt";
 import styled from "styled-components";
 import Top from "../common/Top";
 import CreateCard from "./CreateCard";
 import HabitCard from "./HabitCard";
+import Menu from "../common/Menu";
 
 export default function Habits() {
     const [createNow, setCreateNow] = useState(false);
+    const [reloadHabits, setReloadHabits] = useState(false);
     const [userHabits, setUserHabits] = useState([]);
     const weekdays = [
         { weekday: "D" },
@@ -24,17 +26,23 @@ export default function Habits() {
             setUserHabits(res.data)
         });
 
-    }, [createNow]);
+    }, [createNow, reloadHabits]);
 
     return (
         <>
-            <Top/>
+            <Top />
             <HabitsWrapper>
                 <CreateMenu><h1>Meus hábitos</h1><button onClick={() => setCreateNow(true)}>+</button></CreateMenu>
-                {createNow ? <CreateCard setCreateNow={setCreateNow} weekdays={weekdays}/> : <></>}
+                {createNow ? <CreateCard setCreateNow={setCreateNow} weekdays={weekdays} /> : <></>}
                 {(userHabits.length !== 0) ?
-                    <>{userHabits.map((habit) => <HabitCard key={habit.id} habit={habit}  weekdays={weekdays}/>)} </> :
-                    <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>}
+                    <>{userHabits.map((habit) => <HabitCard
+                        key={habit.id}
+                        habit={habit}
+                        weekdays={weekdays}
+                        setReloadHabits={setReloadHabits}
+                        reloadHabits={reloadHabits} />)} </> :
+                    <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>}
+                    <Menu/>
             </HabitsWrapper>
         </>
     )
@@ -44,14 +52,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 margin-top:70px;
-background-color: #F2F2F2;
-height: 100vh;
-
-p{
-    color: #666666;
-    font-size: 18px;
-    margin: 29px 18px;    
-}
+margin-bottom: 120px;
 `
 const CreateMenu = styled.div`
 display: flex;
@@ -60,10 +61,6 @@ justify-content: space-between;
 align-items: center;
 height: 79px;
 padding: 0 18px;
-h1{
-font-size: 23px;
-color:#126BA5;
-}
 button{
     width: 40px;
     height: 35px;

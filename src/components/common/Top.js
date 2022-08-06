@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logotipo from '../assets/trackIt.png'
+import logotipo from '../assets/trackIt.png';
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 
@@ -8,7 +8,7 @@ export default function Top(){
 return( 
 <Wrapper>
 <Logotipo src={logotipo} alt="logotipo"/> 
-<img src={dataClient.image} alt="profile"/>
+<img src={dataClient.image} alt="profile"/> 
 </Wrapper>
 )   
 }
@@ -25,6 +25,7 @@ box-shadow: 0px 4px 4px 0px #00000026;
 position: fixed;
 top: 0;
 left: 0;
+z-index: 10;
 img{
     width: 51px;
     height: 51px;

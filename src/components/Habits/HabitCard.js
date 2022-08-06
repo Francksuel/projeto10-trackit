@@ -1,20 +1,20 @@
 import styled from "styled-components";
 import Days from "../common/Days";
-import { Trash } from 'react-ionicons'
-import { deleteHabit } from "../services/trackIt";
+import { TrashOutline} from 'react-ionicons'
+import { deleteHabit } from "../../services/trackIt";
 
-export default function HabitCard({ habit, weekdays }) {    
+export default function HabitCard({ habit, weekdays, setReloadHabits, reloadHabits }) {    
     function delHabit(id) {
         if (window.confirm("Deseja apagar esse hábito?")) {
             const request = deleteHabit(id);
-            request.then(() => window.location.reload());
+            request.then(() => setReloadHabits(!reloadHabits));
         }
     }
     return (
         <Wrapper>
-            <h1>{habit.name}</h1>
-            <DeleteButton onClick={() => delHabit(habit.id)}><Trash width="17px" height="20px" />  </DeleteButton>
-            <div>{weekdays.map((value, index) => <Days index={index} days={habit.days} >{value.weekday}</Days>)}</div>
+            <h3>{habit.name}</h3>
+            <DeleteButton onClick={() => delHabit(habit.id)}><TrashOutline width="17px" height="20px" />  </DeleteButton>
+            <div>{weekdays.map((value, index) => <Days key={index} index={index} days={habit.days} >{value.weekday}</Days>)}</div>
         </Wrapper>
     )
 }
@@ -28,13 +28,8 @@ const Wrapper = styled.div`
     border-radius: 5px;
     margin-top: 10px;
     position: relative;
-    h1{
-        color: #666666;
-        font-size: 20px;
-    }
     div{
-        display: flex;      
-        margin-top: 8px;
+        display: flex;        
     }
 `
 const DeleteButton = styled.div`

@@ -1,16 +1,21 @@
 import axios from 'axios';
-
 const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/';
 
 
-function getToken() {
-    const auth = JSON.parse(localStorage.getItem("trackIt"));    
-    const token = {
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    };
-    return token;
+function getToken() {    
+    const auth = JSON.parse(localStorage.getItem("trackIt"));
+    if (auth) {
+        console.log("achei o token")
+        const token = {
+            headers: {
+                Authorization: `Bearer ${auth}`
+            }
+        };
+        return token;
+    } else {
+        console.log("token não encontrado")
+        return false;
+    }
 }
 
 function postRegistration(body) {
@@ -44,6 +49,15 @@ function getTodayHabits() {
     const promise = axios.get(`${URL}habits/today`, token);
     return promise;
 }
+function checkHabit(id) {
+    const token = getToken();
+    const promise = axios.post(`${URL}habits/${id}/check`, {}, token);
+    return promise;
+}
+function uncheckHabit(id) {
+    const token = getToken();
+    const promise = axios.post(`${URL}habits/${id}/uncheck`, {}, token);
+    return promise;
+}
 
-
-export { postRegistration, postLogin, postHabit, getHabits, deleteHabit, getTodayHabits };
+export { postRegistration, postLogin, postHabit, getHabits, deleteHabit, getTodayHabits, checkHabit, uncheckHabit };
