@@ -51,6 +51,7 @@ const Wrapper = styled.div`
 position: absolute;
 top:13px;
 right: 13px;
+cursor: pointer;
     }
     `
 const CurrentSequence = styled.span`

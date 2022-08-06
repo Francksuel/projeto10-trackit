@@ -24,15 +24,20 @@ export default function Today() {
         const promise = getTodayHabits();
         promise.then((res) => {
             setTodayHabits(res.data);
-        });
-    }, [reloadHabit]);
+        });        
+    }, [reloadHabit,setTodayHabits]);
+    const dones=todayHabits.filter((habit)=>habit.done);   
     return (
         <>
             <Top />
             <Wrapper>
-                <h1>{now}</h1>
+                <h1>{now}</h1>                
                 {(todayHabits.length !== 0) ?
-                    <>{todayHabits.map((habit) => <TodayHabit
+                    <>
+                    {dones.length===0 ? 
+                    <p>Nenhum hábito concluído ainda</p> : 
+                    <h5>{((dones.length/todayHabits.length)*100).toFixed(0)}% dos hábitos concluídos</h5>}
+                    {todayHabits.map((habit) => <TodayHabit
                         key={habit.id}
                         habit={habit}
                         todayHabits={todayHabits}
@@ -51,7 +56,19 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-top:70px;
-    background-color: #F2F2F2;
-    height: 100vh;
+    margin-bottom: 101px;
+    background-color: #F2F2F2;   
     padding: 18px;
+    p{
+        color: #BABABA;
+        font-size: 18px;
+        margin-top: 2px;
+        margin-bottom: 18px;
+    }
+    h5{
+        color: #8FC549;
+        font-size: 18px;
+        margin-top: 2px;
+        margin-bottom: 18px; 
+    }
 `

@@ -4,8 +4,7 @@ const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/';
 
 function getToken() {    
     const auth = JSON.parse(localStorage.getItem("trackIt"));
-    if (auth) {
-        console.log("achei o token")
+    if (auth) {       
         const token = {
             headers: {
                 Authorization: `Bearer ${auth}`

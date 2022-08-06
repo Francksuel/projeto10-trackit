@@ -1,16 +1,20 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { postHabit } from "../../services/trackIt";
+import { postHabit, getTodayHabits } from "../../services/trackIt";
 import { ThreeDots } from 'react-loader-spinner';
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 import Input from "../common/Input";
 import Weekday from "./Weekday";
 import Button from "../common/Button";
+
 
 export default function CreateCard({ setCreateNow, weekdays }) {
     const [name, setName] = useState("");
     const [days, setDays] = useState([]);
     const [isDisabled, setIsDisabled] = useState(false);
     const [buttonValue, setButtonValue] = useState("Salvar");
+    const {setTodayHabits} = useContext(UserContext);
 
     function createHabit(e) {
         e.preventDefault();
@@ -31,8 +35,14 @@ export default function CreateCard({ setCreateNow, weekdays }) {
                 setIsDisabled(false);
                 setButtonValue("Salvar");
             });
-            request.then(() =>
-                setCreateNow(false)
+            request.then(() =>{
+                setCreateNow(false);
+                const promise = getTodayHabits();
+                promise.then((res) => {
+                    setTodayHabits(res.data);
+                });  
+            }
+                
             );
         }
     }
