@@ -1,16 +1,16 @@
 import axios from 'axios';
 const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/';
 
-function getToken() {    
+function getToken() {
     const auth = JSON.parse(localStorage.getItem("trackIt"));
-    if (auth) {       
+    if (auth) {
         const token = {
             headers: {
                 Authorization: `Bearer ${auth}`
             }
         };
         return token;
-    } else {        
+    } else {
         return false;
     }
 }
@@ -57,4 +57,14 @@ function uncheckHabit(id) {
     return promise;
 }
 
-export { getToken, postRegistration, postLogin, postHabit, getHabits, deleteHabit, getTodayHabits, checkHabit, uncheckHabit };
+export {
+    getToken,
+    postRegistration,
+    postLogin,
+    postHabit,
+    getHabits,
+    deleteHabit,
+    getTodayHabits,
+    checkHabit,
+    uncheckHabit
+};

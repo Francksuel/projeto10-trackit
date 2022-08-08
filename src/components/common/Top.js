@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import logotipo from '../assets/trackIt.png';
 import { LogOutOutline } from "react-ionicons";
-import { useNavigate } from "react-router-dom";
 
 export default function Top() {
-    const profile = JSON.parse(localStorage.getItem("trackIt/profile"));   
+    const profile = JSON.parse(localStorage.getItem("trackIt/profile"));
     const navigate = useNavigate();
+
     function logout() {
         if (window.confirm("Deseja sair da sua conta?")) {
             window.localStorage.removeItem('trackIt');
@@ -13,6 +14,7 @@ export default function Top() {
             navigate("/");
         }
     }
+
     return (
         <Wrapper>
             <Logotipo src={logotipo} alt="logotipo" />

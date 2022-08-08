@@ -29,7 +29,7 @@ export default function TodayHabit({ habit, setTodayHabits, reloadHabit, setRelo
             <h4>Seu recorde: <HighestSequence habit={habit}>{habit.highestSequence} dias</HighestSequence></h4>
             <div onClick={() => isDone(habit)}>
                 <Checkbox width="69px" height="69px" color={habit.done ? "#8FC549" : "#E7E7E7"} />
-                </div>
+            </div>
         </Wrapper>
     )
 }
@@ -48,17 +48,17 @@ const Wrapper = styled.div`
         font-size: 13px;
     } 
     div{
-position: absolute;
-top:13px;
-right: 13px;
-cursor: pointer;
+        position: absolute;
+        top:13px;
+        right: 13px;
+        cursor: pointer;
     }
     `
 const CurrentSequence = styled.span`
-    color: ${props=> props.habit.done ? '#8FC549' : '#666666'};
+    color: ${props => props.habit.done ? '#8FC549' : '#666666'};
 `
 const HighestSequence = styled.span`
-    color: ${props=> props.habit.done ? 
-    props.habit.currentSequence === props.habit.highestSequence ? 
-    '#8FC549' : '#666666':'#666666'};
+    color: ${props => props.habit.done ?
+        props.habit.currentSequence === props.habit.highestSequence ?
+            '#8FC549' : '#666666' : '#666666'};
 `

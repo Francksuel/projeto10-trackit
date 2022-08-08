@@ -7,14 +7,14 @@ import Top from "../common/Top";
 
 export default function Historic() {
     const navigate = useNavigate();
-    useEffect (()=>{
+    useEffect(() => {
         const isLogged = getToken();
-        if (!isLogged){
+        if (!isLogged) {
             alert("Você não está logado!");
             navigate("/");
         }
-    },[navigate]);
-   
+    }, [navigate]);
+
     return (
         <>
             <Top />
@@ -30,9 +30,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;    
     align-items:flex-start;   
-    margin-top:70px;
-    background-color: #F2F2F2;
-    height: 100vh;  
+    margin-top:70px;    
     h1{
         margin: 28px 0 0 17px;
     }  

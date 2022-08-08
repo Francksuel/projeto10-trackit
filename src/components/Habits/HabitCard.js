@@ -1,30 +1,35 @@
 import styled from "styled-components";
-import Days from "../common/Days";
-import { TrashOutline} from 'react-ionicons';
-import { deleteHabit } from "../../services/trackIt";
+import { TrashOutline } from 'react-ionicons';
+import { deleteHabit, getTodayHabits } from "../../services/trackIt";
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
-import { getTodayHabits } from "../../services/trackIt";
+import Days from "../common/Days";
 
-export default function HabitCard({ habit, weekdays, setReloadHabits, reloadHabits }) {    
+export default function HabitCard({ habit, weekdays, setReloadHabits, reloadHabits }) {
     const { setTodayHabits } = useContext(UserContext);
 
     function delHabit(id) {
         if (window.confirm("Deseja apagar esse hábito?")) {
             const request = deleteHabit(id);
-            request.then(() => {setReloadHabits(!reloadHabits)
-            const promise = getTodayHabits();
+            request.then(() => {
+                setReloadHabits(!reloadHabits)
+                const promise = getTodayHabits();
                 promise.then((res) => {
                     setTodayHabits(res.data);
                 });
-        });
+            });
         }
     }
+    
     return (
         <Wrapper>
             <h3>{habit.name}</h3>
-            <DeleteButton onClick={() => delHabit(habit.id)}><TrashOutline width="17px" height="20px" />  </DeleteButton>
-            <div>{weekdays.map((value, index) => <Days key={index} index={index} days={habit.days} >{value.weekday}</Days>)}</div>
+            <DeleteButton onClick={() => delHabit(habit.id)}>
+                <TrashOutline width="17px" height="20px" />
+            </DeleteButton>
+            <div>{weekdays.map((value, index) =>
+                <Days key={index} index={index} days={habit.days} >{value.weekday}</Days>)}
+            </div>
         </Wrapper>
     )
 }

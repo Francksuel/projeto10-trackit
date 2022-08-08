@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from './components/common/GlobalStyle';
 import { useState } from "react";
+import UserContext from "./contexts/UserContext";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import Habits from "./components/Habits/Habits";
-import UserContext from "./contexts/UserContext";
 import Today from "./components/Today/Today";
 import Historic from './components/Historic/Historic';
 

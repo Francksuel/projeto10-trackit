@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState,useEffect,useContext  } from "react";
-import { postLogin,getToken  } from "../../services/trackIt";
+import { useState, useEffect, useContext } from "react";
+import { postLogin, getToken } from "../../services/trackIt";
 import { ThreeDots } from 'react-loader-spinner';
 import Logo from "../common/Logo";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import UserContext from "../../contexts/UserContext";
-
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -15,19 +14,19 @@ export default function Login() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [buttonValue, setButtonValue] = useState("Entrar");
     const navigate = useNavigate();
-    const { setDataClient } = useContext(UserContext);    
+    const { setDataClient } = useContext(UserContext);
 
-    useEffect (()=>{
+    useEffect(() => {
         const isLogged = getToken();
-        if (isLogged){            
+        if (isLogged) {
             navigate("/hoje");
         }
-    },[navigate]);
+    }, [navigate]);
 
     function logInto(e) {
         e.preventDefault();
         setIsDisabled(true);
-        setButtonValue(<ThreeDots color="white" height="13px"/>);
+        setButtonValue(<ThreeDots color="white" height="13px" />);
         const dataLog = {
             email,
             password,
@@ -46,12 +45,19 @@ export default function Login() {
         }
         );
     }
+    
     return (
         <ScreenLogin>
             <Logo />
             <form onSubmit={logInto}>
-                <Input placeholder={"email"} type={"email"} value={email} disabled={isDisabled} onChange={e => setEmail(e.target.value)} />
-                <Input placeholder={"senha"} type={"password"} value={password} disabled={isDisabled} onChange={e => setPassword(e.target.value)} />
+                <Input placeholder={"email"}
+                    type={"email"} value={email}
+                    disabled={isDisabled}
+                    onChange={e => setEmail(e.target.value)} />
+                <Input placeholder={"senha"}
+                    type={"password"} value={password}
+                    disabled={isDisabled}
+                    onChange={e => setPassword(e.target.value)} />
                 <Button disabled={isDisabled} value={buttonValue} />
             </form>
             <Link to={'/cadastro'}><h6>Não tem uma conta? Cadastre-se!</h6></Link>
@@ -59,15 +65,14 @@ export default function Login() {
     )
 }
 const ScreenLogin = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-background-color: white;
-height: 120vh;
-form{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+    background-color: white;
+    height: 120vh;
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `
-

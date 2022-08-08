@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Menu() {
     const navigate = useNavigate();
-    const {todayHabits} = useContext(UserContext);
-    const dones=todayHabits.filter((habit)=>habit.done);
-    const percentage = ((dones.length/todayHabits.length)).toFixed(2);
+    const { todayHabits } = useContext(UserContext);
+    const dones = todayHabits.filter((habit) => habit.done);
+    const percentage = ((dones.length / todayHabits.length)).toFixed(2);
+
     return (
         <Wrapper>
             <h3 onClick={() => navigate('/habitos')}>Hábitos</h3>
