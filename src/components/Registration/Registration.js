@@ -55,7 +55,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background-color: white;
-height: 170vh;
+height: 130vh;
 form{
     display: flex;
     flex-direction: column;

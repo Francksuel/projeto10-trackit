@@ -1,8 +1,20 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getToken } from "../../services/trackIt";
 import Menu from "../common/Menu";
 import Top from "../common/Top";
 
 export default function Historic() {
+    const navigate = useNavigate();
+    useEffect (()=>{
+        const isLogged = getToken();
+        if (!isLogged){
+            alert("Você não está logado!");
+            navigate("/");
+        }
+    },[navigate]);
+   
     return (
         <>
             <Top />

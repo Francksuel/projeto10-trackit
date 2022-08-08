@@ -2,15 +2,16 @@ import styled from "styled-components";
 import dayjs from 'dayjs';
 import "dayjs/locale/pt-br";
 import updateLocale from 'dayjs/plugin/updateLocale';
-import { getTodayHabits } from "../../services/trackIt";
-import {useState, useEffect} from "react";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { getTodayHabits,getToken } from "../../services/trackIt";
+import {useState, useEffect,useContext} from "react";
 import UserContext from "../../contexts/UserContext";
 import Menu from "../common/Menu";
 import Top from "../common/Top";
 import TodayHabit from "./TodayHabit";
 
 export default function Today() {
+    
     dayjs.extend(updateLocale);
     dayjs.updateLocale('pt-br', {
         weekdays: [
@@ -20,12 +21,19 @@ export default function Today() {
     const now = dayjs().locale('pt-br').format("dddd, DD/MM");
     const {todayHabits, setTodayHabits} = useContext(UserContext);
     const [reloadHabit,setReloadHabit]=useState(false);
+    const navigate = useNavigate();
+    
     useEffect(() => {
+        const isLogged = getToken();
+        if (!isLogged){
+            alert("Você não está logado!");
+            navigate("/");
+        }
         const promise = getTodayHabits();
         promise.then((res) => {
             setTodayHabits(res.data);
         });        
-    }, [reloadHabit,setTodayHabits]);
+    }, [reloadHabit,setTodayHabits,navigate]);
     const dones=todayHabits.filter((habit)=>habit.done);   
     return (
         <>

@@ -1,13 +1,23 @@
 import styled from "styled-components";
 import Days from "../common/Days";
-import { TrashOutline} from 'react-ionicons'
+import { TrashOutline} from 'react-ionicons';
 import { deleteHabit } from "../../services/trackIt";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+import { getTodayHabits } from "../../services/trackIt";
 
 export default function HabitCard({ habit, weekdays, setReloadHabits, reloadHabits }) {    
+    const { setTodayHabits } = useContext(UserContext);
+
     function delHabit(id) {
         if (window.confirm("Deseja apagar esse hábito?")) {
             const request = deleteHabit(id);
-            request.then(() => setReloadHabits(!reloadHabits));
+            request.then(() => {setReloadHabits(!reloadHabits)
+            const promise = getTodayHabits();
+                promise.then((res) => {
+                    setTodayHabits(res.data);
+                });
+        });
         }
     }
     return (

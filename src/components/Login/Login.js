@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { postLogin } from "../../services/trackIt";
-import { useContext } from "react";
+import { useState,useEffect,useContext  } from "react";
+import { postLogin,getToken  } from "../../services/trackIt";
 import { ThreeDots } from 'react-loader-spinner';
 import Logo from "../common/Logo";
 import Input from "../common/Input";
@@ -16,7 +15,14 @@ export default function Login() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [buttonValue, setButtonValue] = useState("Entrar");
     const navigate = useNavigate();
-    const { setDataClient } = useContext(UserContext);
+    const { setDataClient } = useContext(UserContext);    
+
+    useEffect (()=>{
+        const isLogged = getToken();
+        if (isLogged){            
+            navigate("/hoje");
+        }
+    },[navigate]);
 
     function logInto(e) {
         e.preventDefault();
@@ -28,12 +34,13 @@ export default function Login() {
         }
         const request = postLogin(dataLog);
         request.catch(() => {
-            alert("Usuário não encontrado")
+            alert("Falha ao encontrar usuário!");
             setIsDisabled(false);
             setButtonValue("Entrar");
         });
         request.then((res) => {
             localStorage.setItem('trackIt', JSON.stringify(res.data.token));
+            localStorage.setItem('trackIt/profile', JSON.stringify(res.data.image));
             setDataClient(res.data);
             navigate("/hoje");
         }
@@ -56,7 +63,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background-color: white;
-height: 170vh;
+height: 120vh;
 form{
     display: flex;
     flex-direction: column;
