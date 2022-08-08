@@ -51,4 +51,5 @@ const DeleteButton = styled.div`
     position: absolute;
     top: 11px;
     right: 10px;
+    cursor:pointer;
 `

@@ -19,7 +19,7 @@ export default function Top() {
         <Wrapper>
             <Logotipo src={logotipo} alt="logotipo" />
             <div>
-                <div onClick={() => logout()}><LogOutOutline color="white" /></div>
+                <div onClick={() => logout()}><LogOutOutline color="white"/></div>
                 <img src={profile} alt="profile" />
             </div>
         </Wrapper>
@@ -41,7 +41,10 @@ const Wrapper = styled.div`
     z-index: 10;
     div{
         display: flex;
-        align-items: center;
+        align-items: center;        
+    }
+    div > div{
+        cursor:pointer;
     }
     img{
         width: 51px;

@@ -27,11 +27,11 @@ export default function Registration() {
             password,
         }
         const request = postRegistration(dataRegister);
-        request.catch(() => {
-            alert("Erro ao cadastrar!");
+        request.catch((res) => {
+            alert(res.response.data.message);            
             setIsDisabled(false);
             setButtonValue("Cadastrar");
-        })
+        });
         request.then(() => navigate("/"));
     }
 
