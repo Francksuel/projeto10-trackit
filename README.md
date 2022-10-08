@@ -4,7 +4,7 @@
 
 # Track it
 
-**Track it** - is a is a way to organize and visualize your daily habits with a simple and intuitive interface.
+**Track it** - is a way to organize and visualize yours daily habits with a simple and intuitive interface.
 
 Front-end project using React referring to the tenth weekly project of the Driven Education course.
 
@@ -32,7 +32,7 @@ Front-end project using React referring to the tenth weekly project of the Drive
 ![Today's Habits](https://user-images.githubusercontent.com/107144900/194439988-64a63c42-ca42-4398-a744-ce05994b0419.png)
 
 ## 💻 Technologies:
-The following tools were used in building the project:
+The following tools were used in building the project:<br/>
 **React:**
 - [Styled Components;](https://www.npmjs.com/package/styled-components)
 - [React Router Dom;](https://www.npmjs.com/package/react-router-dom)
@@ -41,5 +41,3 @@ The following tools were used in building the project:
 - [React Loader Spinner;](https://www.npmjs.com/package/react-loader-spinner)
 - [React Circular Progressbar;](https://www.npmjs.com/package/react-circular-progressbar)
 - [Dayjs;](https://day.js.org/)<br/>
-
-
